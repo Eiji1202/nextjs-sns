@@ -18,7 +18,8 @@
 - Next.js（バージョン 14 の AppRouter）
 - FirebaseAuthentication
 - Firestore
-- ReactHookForm（ユーザー登録のフォームと投稿で使用）
+- ReactHookForm（ユーザー登録のフォームと投稿の型付けとバリデーション）
+- Zod（APIのリクエストとレスポンスの型付け）
 
 ## ユーザー登録時の入力内容
 
