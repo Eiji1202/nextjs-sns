@@ -18,13 +18,16 @@ const TextBox: React.FC<Props> = ({
   disabled = false,
   className,
 }) => {
+  const inputClassNames = clsx(s.input, className, {
+    [s.disabled]: disabled === true,
+  });
   return (
     <input
       type={type}
       name={name}
       placeholder={placeholder}
       required={required}
-      className={clsx(s.input, className)}
+      className={inputClassNames}
       autoComplete="off"
       autoFocus={false}
       disabled={disabled}
