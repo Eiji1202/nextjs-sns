@@ -1,0 +1,54 @@
+@use "styles/index.sass" as *
+
+.button
+  width: 100%
+  padding: 8px 16px
+  +br8()
+
+  &:hover
+    +opacity()
+
+  +viewM()
+    padding: 6px 12px
+    +fs14()
+    +br6()
+
+  +viewS()
+    padding: 4px 8px
+    +fs12()
+    +br4()
+
+.primary
+  background-color: $green
+  color: $white
+
+.secondary
+  background-color: $darkGray
+  color: $white
+
+.outline
+  background-color: $white
+  color: $black
+  outline: 1px solid $black
+
+  &:hover
+    background-color: $lightGray
+    transition: background-color 0.2s
+
+.xs
+  width: 80px
+
+.sm
+  width: 160px
+
+.md
+  width: 240px
+
+.lg
+  width: 320px
+
+.disabled
+  background-color: $lightGray
+  color: $gray
+  outline: 1px solid $gray
+  pointer-events: none
