@@ -1,6 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import s from "./Button.module.sass";
+import Loader from "@/components/atoms/Loader/Loader";
 
 type Props = {
   label: string;
@@ -40,7 +41,8 @@ const Button: React.FC<Props> = ({
       type={type}
       onClick={onClick}
     >
-      {isLoading ? "Loading..." : label}
+      {isLoading && <Loader />}
+      <span>{label}</span>
     </button>
   );
 };
