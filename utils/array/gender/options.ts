@@ -1,11 +1,11 @@
 type GenderOption = {
   label: string;
-  value: number;
+  value: string;
 }[];
 
 export const genderOptions: GenderOption = [
-  { label: "選択してください", value: 0 },
-  { label: "男性", value: 1 },
-  { label: "女性", value: 2 },
-  { label: "その他", value: 3 },
+  { label: "選択してください", value: "" },
+  { label: "男性", value: "male" },
+  { label: "女性", value: "female" },
+  { label: "その他", value: "other" },
 ];

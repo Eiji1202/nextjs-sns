@@ -1,0 +1,36 @@
+@use "styles/index.sass" as *
+
+.formContainer
+  padding: 32px
+  border: 1px solid $gray
+  +br8()
+
+  +viewS()
+    padding: 16px
+
+  .title
+    +fs24()
+    text-align: center
+
+    +viewM()
+      +fs20()
+
+    +viewS()
+      +fs18()
+
+  .inputWrapper
+    +flexCol()
+    gap: 16px
+    margin-top: 24px
+    margin-bottom: 24px
+
+    .flexCol
+      +flexCol()
+
+  .buttonWrapper
+    +flex()
+    justify-content: center
+
+    .button
+      +viewS()
+        width: 100%
