@@ -48,7 +48,7 @@ const defaultValues: SignUpFormData = {
   terms: false,
 };
 
-const SignUpForm = () => {
+const SignUpForm: React.FC = () => {
   const {
     register,
     handleSubmit,
