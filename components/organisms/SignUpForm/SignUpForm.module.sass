@@ -1,0 +1,79 @@
+@use "styles/index.sass" as *
+
+.formContainer
+  padding: 32px
+  border: 1px solid $gray
+  +br8()
+
+  +viewS()
+    padding: 16px
+
+  .title
+    +fs24()
+    text-align: center
+
+    +viewM()
+      +fs20()
+
+    +viewS()
+      +fs18()
+
+  .inputWrapper
+    +flexCol()
+    gap: 16px
+    margin-top: 24px
+    margin-bottom: 24px
+
+    .flexCol
+      +flexCol()
+
+    .file
+      +fs12()
+
+    .file::file-selector-button
+      color: $black
+      background-color: $gray
+      +fs12()
+      +br8()
+      padding: 6px 12px
+      border: none
+
+      &:hover
+        +opacity()
+
+    .selectBoxWrapper
+      display: flex
+      gap: 16px
+
+      +viewS()
+        +flexCol()
+        align-items: flex-start
+
+    .selectBox
+      width: 160px!important
+
+    .terms
+      +flex()
+      gap: 8px
+      +fs14()
+
+      +viewS()
+        +fs12()
+
+    .checkbox
+      margin-bottom: 28px
+
+    .termsLink
+      color: $blue
+      margin-right: 4px
+
+      &:hover
+        +opacity()
+
+  .buttonWrapper
+    +flex()
+    justify-content: center
+
+    .button
+      +viewS()
+        width: 100%
