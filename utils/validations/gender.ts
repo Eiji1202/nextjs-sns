@@ -1,3 +1,3 @@
 export const GENDER_VALIDATION = {
-  validate: (value: number) => value !== 0 || "性別を選択してください",
+  validate: (value: string) => value !== "" || "性別を選択してください",
 }

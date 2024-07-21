@@ -30,7 +30,7 @@ export type SignUpFormData = {
     month: number;
     day: number;
   };
-  gender: number;
+  gender: string;
   terms: boolean;
 };
 
@@ -44,7 +44,7 @@ const defaultValues: SignUpFormData = {
     month: 0,
     day: 0,
   },
-  gender: 0,
+  gender: "",
   terms: false,
 };
 
