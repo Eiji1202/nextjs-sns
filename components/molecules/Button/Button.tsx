@@ -1,4 +1,3 @@
-import React from "react";
 import clsx from "clsx";
 import s from "./Button.module.sass";
 import Loader from "@/components/atoms/Loader/Loader";

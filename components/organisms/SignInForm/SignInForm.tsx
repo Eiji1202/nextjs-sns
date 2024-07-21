@@ -18,7 +18,7 @@ const defaultValues: SignInFormData = {
   password: "",
 };
 
-const SignUpForm = () => {
+const SignInForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -84,4 +84,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
