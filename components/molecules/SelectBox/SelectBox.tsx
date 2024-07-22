@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import s from "./SelectBox.module.sass";
+import s from "./style.module.sass";
 import ErrorMessage, {
   Error,
 } from "@/components/atoms/ErrorMessage/ErrorMessage";

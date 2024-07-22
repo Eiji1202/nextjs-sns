@@ -1,0 +1,49 @@
+@use "styles/index.sass" as *
+
+.main
+  padding: 96px 32px 32px
+  background-color: $lightGray
+  min-height: 100vh
+
+  +viewM()
+    padding: 88px 24px 24px
+
+  +viewS()
+    padding: 80px 16px 16px
+
+.container
+  display: flex
+  gap: 32px
+
+  +viewM()
+    +flexCol()
+    gap: 24px
+
+  +viewS()
+    gap: 16px
+
+  .form
+    flex: 1
+
+  .or
+    display: none
+
+    +viewM()
+      +flex()
+      +fs14()
+      text-align: center
+      color: $gray
+
+      &::before,
+      &::after
+        content: ""
+        height: 1px
+        flex-grow: 1
+        background-color: $gray
+
+      &::before
+        margin-right: 16px
+
+      &::after
+        margin-left: 16px
+

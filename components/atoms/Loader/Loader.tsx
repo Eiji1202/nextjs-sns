@@ -1,6 +1,6 @@
 import { Loader as LoaderIcon } from "lucide-react";
 import clsx from "clsx";
-import s from "./Loader.module.sass";
+import s from "./style.module.sass";
 
 type Props = {
   size?: number;

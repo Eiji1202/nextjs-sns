@@ -1,7 +1,8 @@
 "use client";
 import FormLabel from "@/components/atoms/FormLabel/FormLabel";
 import TextBox from "@/components/molecules/TextBox/TextBox";
-import s from "./SignUpForm.module.sass";
+import s from "./style.module.sass";
+import clsx from "clsx";
 import SelectBox from "@/components/molecules/SelectBox/SelectBox";
 import {
   daysOption,
@@ -48,7 +49,11 @@ const defaultValues: SignUpFormData = {
   terms: false,
 };
 
-const SignUpForm: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const SignUpForm: React.FC<Props> = ({ className }) => {
   const {
     register,
     handleSubmit,
@@ -79,7 +84,7 @@ const SignUpForm: React.FC = () => {
 
   return (
     <form
-      className={s.formContainer}
+      className={clsx(s.formContainer, className)}
       onSubmit={handleSubmit(handleSignUp)}
     >
       <h1 className={s.title}>新規ユーザー登録</h1>
