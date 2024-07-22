@@ -18,37 +18,37 @@
   +viewS()
     +fs12()
 
-.primary
-  background-color: $green
-  color: $white
+  &.primary
+    background-color: $green
+    color: $white
 
-.secondary
-  background-color: $darkGray
-  color: $white
+  &.secondary
+    background-color: $darkGray
+    color: $white
 
-.outline
-  background-color: $white
-  color: $black
-  outline: 1px solid $black
+  &.outline
+    background-color: $white
+    color: $black
+    outline: 1px solid $black
 
-  &:hover
+    &:hover
+      background-color: $lightGray
+      transition: background-color 0.2s
+
+  &.xs
+    width: 80px
+
+  &.sm
+    width: 160px
+
+  &.md
+    width: 240px
+
+  &.lg
+    width: 320px
+
+  &.disabled
     background-color: $lightGray
-    transition: background-color 0.2s
-
-.xs
-  width: 80px
-
-.sm
-  width: 160px
-
-.md
-  width: 240px
-
-.lg
-  width: 320px
-
-.disabled
-  background-color: $lightGray
-  color: $gray
-  outline: 1px solid $gray
-  pointer-events: none
+    color: $gray
+    outline: 1px solid $gray
+    pointer-events: none

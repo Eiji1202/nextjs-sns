@@ -1,14 +1,14 @@
 @use 'styles/index.sass' as *
 
-.input
-  +br6()
-  +fs12()
-  outline: 1px solid $gray
-  padding: 6px 8px
+.textarea
   width: 100%
+  padding: 8px
+  outline: 1px solid $gray
+  border-radius: 4px
 
   &:focus
     outline-width: 2px
 
   &.disabled
     background-color: $lightGray
+    cursor: not-allowed
