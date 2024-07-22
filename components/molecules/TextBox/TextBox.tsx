@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import s from "./TextBox.module.sass";
+import s from "./style.module.sass";
 import ErrorMessage, {
   Error,
 } from "@/components/atoms/ErrorMessage/ErrorMessage";

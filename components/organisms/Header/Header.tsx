@@ -1,5 +1,5 @@
 import { siteName } from "@/config/site";
-import s from "./Header.module.sass";
+import s from "./style.module.sass";
 
 const Header: React.FC = () => {
   return (

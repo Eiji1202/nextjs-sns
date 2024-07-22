@@ -1,8 +1,8 @@
 "use client";
 import FormLabel from "@/components/atoms/FormLabel/FormLabel";
 import TextBox from "@/components/molecules/TextBox/TextBox";
-import s from "./SignInForm.module.sass";
-
+import s from "./style.module.sass";
+import clsx from "clsx";
 import Button from "@/components/molecules/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_VALIDATION } from "@/utils/validations/email";
@@ -18,7 +18,11 @@ const defaultValues: SignInFormData = {
   password: "",
 };
 
-const SignInForm: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const SignInForm: React.FC<Props> = ({ className }) => {
   const {
     register,
     handleSubmit,
@@ -39,7 +43,7 @@ const SignInForm: React.FC = () => {
 
   return (
     <form
-      className={s.formContainer}
+      className={clsx(s.formContainer, className)}
       onSubmit={handleSubmit(handleSignIn)}
     >
       <h1 className={s.title}>ログイン</h1>

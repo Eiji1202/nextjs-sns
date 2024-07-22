@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import s from "./ErrorMessage.module.sass";
+import s from "./style.module.sass";
 import type { FieldError } from "react-hook-form";
 
 export type Error = Partial<FieldError>;

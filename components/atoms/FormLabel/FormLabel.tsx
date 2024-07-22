@@ -1,4 +1,4 @@
-import s from "./FormLabel.module.sass";
+import s from "./style.module.sass";
 import clsx from "clsx";
 
 export type Props = {
