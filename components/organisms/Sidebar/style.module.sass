@@ -2,14 +2,26 @@
 
 .sidebar
   padding: 24px 40px
+  background-color: $white
+  +shadow()
+
+  +viewM()
+    padding: 16px 24px
 
   +viewS()
-    padding: 16px 24px
+    padding: 8px 16px
+
+  .title
+    +viewM()
+      text-align: center
 
   .ul
     +flexCol()
     gap: 12px
     margin-top: 24px
+
+    +viewM()
+      align-items: center
 
     .li
       list-style: none
@@ -26,5 +38,5 @@
           +transition()
 
         .menuName
-          +viewS()
+          +viewM()
             display: none

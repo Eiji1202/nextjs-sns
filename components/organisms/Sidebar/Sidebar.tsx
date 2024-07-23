@@ -4,11 +4,19 @@ import { siteConfig } from "@/config/site";
 import { sidebarMenus } from "@/config/sidebar";
 import Title from "@/components/atoms/Title/Title";
 import CustomLink from "@/components/molecules/CustomLink/CustomLink";
+import clsx from "clsx";
 
-const Sidebar: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const Sidebar: React.FC<Props> = ({ className }) => {
   return (
-    <aside className={s.sidebar}>
-      <Title title={siteConfig.name} />
+    <aside className={clsx(s.sidebar, className)}>
+      <Title
+        title={siteConfig.name}
+        className={s.title}
+      />
       <ul className={s.ul}>
         {sidebarMenus.map((menu) => (
           <li className={s.li}>
