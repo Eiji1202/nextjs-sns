@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export type SiteConfig = {
   name: string;
   description: string;
@@ -12,4 +14,10 @@ export type SiteConfig = {
     name: string;
     url: string;
   }[];
+};
+
+export type SidebarMenu = {
+  name: string;
+  icon: LucideIcon;
+  url: string;
 };
