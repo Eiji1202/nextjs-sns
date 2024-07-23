@@ -20,6 +20,7 @@ import { EMAIL_VALIDATION } from "@/utils/validations/email";
 import { PASSWORD_VALIDATION } from "@/utils/validations/password";
 import { DATE_OF_BIRTH_VALIDATION } from "@/utils/validations/dateOfBirth";
 import { GENDER_VALIDATION } from "@/utils/validations/gender";
+import Title from "@/components/atoms/Title/Title";
 
 export type SignUpFormData = {
   username: string;
@@ -87,7 +88,10 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
       className={clsx(s.formContainer, className)}
       onSubmit={handleSubmit(handleSignUp)}
     >
-      <h1 className={s.title}>新規ユーザー登録</h1>
+      <Title
+        title="新規ユーザー登録"
+        className={s.title}
+      />
       <div className={s.inputWrapper}>
         <div className={s.flexCol}>
           <FormLabel

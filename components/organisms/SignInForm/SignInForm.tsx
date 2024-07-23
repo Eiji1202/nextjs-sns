@@ -7,6 +7,7 @@ import Button from "@/components/molecules/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_VALIDATION } from "@/utils/validations/email";
 import { PASSWORD_VALIDATION } from "@/utils/validations/password";
+import Title from "@/components/atoms/Title/Title";
 
 export type SignInFormData = {
   email: string;
@@ -46,7 +47,10 @@ const SignInForm: React.FC<Props> = ({ className }) => {
       className={clsx(s.formContainer, className)}
       onSubmit={handleSubmit(handleSignIn)}
     >
-      <h1 className={s.title}>ログイン</h1>
+      <Title
+        title="ログイン"
+        className={s.title}
+      />
       <div className={s.inputWrapper}>
         <div className={s.flexCol}>
           <FormLabel

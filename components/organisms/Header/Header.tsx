@@ -1,10 +1,14 @@
 import { siteConfig } from "@/config/site";
 import s from "./style.module.sass";
+import Title from "@/components/atoms/Title/Title";
 
 const Header: React.FC = () => {
   return (
     <header className={s.header}>
-      <h1 className={s.title}>{siteConfig.name}</h1>
+      <Title
+        title={siteConfig.name}
+        className={s.title}
+      />
     </header>
   );
 };
