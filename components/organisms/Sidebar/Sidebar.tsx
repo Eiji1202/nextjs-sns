@@ -3,11 +3,12 @@ import s from "./style.module.sass";
 import { siteConfig } from "@/config/site";
 import { sidebarMenus } from "@/config/sidebar";
 import Link from "next/link";
+import Title from "@/components/atoms/Title/Title";
 
 const Sidebar: React.FC = () => {
   return (
     <aside className={s.sidebar}>
-      <h1 className={s.title}>{siteConfig.name}</h1>
+      <Title title={siteConfig.name} />
       <ul className={s.ul}>
         {sidebarMenus.map((menu) => (
           <li className={s.li}>
