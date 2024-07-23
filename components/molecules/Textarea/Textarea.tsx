@@ -34,7 +34,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, Props>(
     });
 
     return (
-      <>
+      <div>
         <textarea
           name={name}
           placeholder={placeholder}
@@ -48,7 +48,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, Props>(
           {...rest}
         />
         {error && <ErrorMessage error={error} />}
-      </>
+      </div>
     );
   }
 );

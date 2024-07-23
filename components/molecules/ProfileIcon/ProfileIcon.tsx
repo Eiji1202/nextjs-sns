@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 
-const ProfileIcon: React.FC<Props> = ({ src, alt, size = 30, className }) => {
+const ProfileIcon: React.FC<Props> = ({ src, alt, size = 60, className }) => {
   return (
     <div
       className={clsx(s.imageWrapper, className)}

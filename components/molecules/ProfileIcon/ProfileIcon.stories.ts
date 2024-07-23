@@ -18,6 +18,6 @@ export const Size40: Story = {
   args: {
     src: "next.svg",
     alt: "プロフィールアイコン",
-    size: 40,
+    size: 100,
   },
 };

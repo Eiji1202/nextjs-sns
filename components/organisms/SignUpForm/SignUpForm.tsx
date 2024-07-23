@@ -79,7 +79,7 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
   };
 
   const handleSignUp: SubmitHandler<SignUpFormData> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1秒間の遅延
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
   };
 
