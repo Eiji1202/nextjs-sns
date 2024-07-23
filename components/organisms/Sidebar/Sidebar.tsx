@@ -2,8 +2,8 @@ import React from "react";
 import s from "./style.module.sass";
 import { siteConfig } from "@/config/site";
 import { sidebarMenus } from "@/config/sidebar";
-import Link from "next/link";
 import Title from "@/components/atoms/Title/Title";
+import CustomLink from "@/components/molecules/CustomLink/CustomLink";
 
 const Sidebar: React.FC = () => {
   return (
@@ -12,13 +12,13 @@ const Sidebar: React.FC = () => {
       <ul className={s.ul}>
         {sidebarMenus.map((menu) => (
           <li className={s.li}>
-            <Link
+            <CustomLink
               href={menu.url}
               className={s.link}
             >
               <menu.icon size={24} />
               <span className={s.menuName}>{menu.name}</span>
-            </Link>
+            </CustomLink>
           </li>
         ))}
       </ul>
