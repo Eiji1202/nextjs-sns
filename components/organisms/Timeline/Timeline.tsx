@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import s from "./style.module.sass";
+import PostBox from "./partials/PostBox/PostBox";
 
 type Props = {
   className?: string;
@@ -8,7 +9,8 @@ type Props = {
 const Timeline: React.FC<Props> = ({ className }) => {
   return (
     <div className={clsx(s.timeline, className)}>
-      {/* タイムラインの内容 */}
+      <PostBox />
+      <hr className={s.hr} />
     </div>
   );
 };

@@ -1,0 +1,40 @@
+@use "styles/index.sass" as *
+
+.postBox
+  +flexCol()
+  gap: 16px
+
+  +viewM()
+    gap: 8px
+
+  .profileWrapper
+    +flex()
+    gap: 16px
+
+    +viewM()
+      gap: 8px
+
+    .profileIcon
+      +viewM()
+        width: 48px!important
+        height: 48px!important
+
+    .name
+      +fs18()
+      +fb()
+
+      +viewM()
+        +fs16()
+
+      +viewS()
+        +fs14()
+
+  .buttonWrapper
+    +flex()
+    justify-content: space-between
+
+    .count
+      color: $gray
+
+      +viewM()
+        +fs14()

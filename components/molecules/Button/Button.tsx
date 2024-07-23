@@ -40,8 +40,7 @@ const Button: React.FC<Props> = ({
       type={type}
       onClick={onClick}
     >
-      {isLoading && <Loader />}
-      <span>{label}</span>
+      {isLoading ? <Loader /> : <>{label}</>}
     </button>
   );
 };
