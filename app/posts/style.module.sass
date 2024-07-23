@@ -1,1 +1,22 @@
 @use 'styles/index.sass' as *
+
+.container
+  background-color: $lightGray
+  display: flex
+  gap: 32px
+  min-height: 100vh
+
+  +viewM()
+    gap: 16px
+
+  +viewS()
+    gap: 8px
+
+  .sidebar
+    width: 30%
+    min-width: 120px
+    overflow: hidden
+
+  .timeline
+    flex-grow: 1
+    overflow-y: auto
