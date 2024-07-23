@@ -1,0 +1,41 @@
+@use 'styles/index.sass' as *
+
+.sidebar
+  padding: 24px 40px
+
+  +viewS()
+    padding: 16px 24px
+
+  .title
+    +fs24()
+
+    +viewM()
+      +fs20()
+
+    +viewS()
+      +fs18()
+
+  .ul
+    +flexCol()
+    gap: 12px
+    margin-top: 24px
+
+    .li
+      list-style: none
+
+      .link
+        +flex()
+        gap: 8px
+        color: $black
+        text-decoration: none
+        padding: 8px
+        width: fit-content
+        +br8()
+
+        &:hover
+          background-color: $lightGray
+          +transition()
+
+        .menuName
+          +viewS()
+            display: none

@@ -1,7 +1,5 @@
-import Header from "@/components/organisms/Header/Header";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import s from "./style.module.sass";
 import "./global.sass";
 import "ress";
 import { siteConfig } from "@/config/site";
@@ -41,8 +39,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={notoSansJp.className}>
-        <Header />
-        <main className={s.main}>{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
