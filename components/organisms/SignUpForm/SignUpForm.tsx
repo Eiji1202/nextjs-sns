@@ -11,7 +11,6 @@ import {
 } from "@/utils/array/dateOfBirth/options";
 import { genderOptions } from "@/utils/array/gender/options";
 import Button from "@/components/molecules/Button/Button";
-import Link from "next/link";
 import { termsUrl } from "@/config/site";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ErrorMessage from "@/components/atoms/ErrorMessage/ErrorMessage";
@@ -21,6 +20,7 @@ import { PASSWORD_VALIDATION } from "@/utils/validations/password";
 import { DATE_OF_BIRTH_VALIDATION } from "@/utils/validations/dateOfBirth";
 import { GENDER_VALIDATION } from "@/utils/validations/gender";
 import Title from "@/components/atoms/Title/Title";
+import CustomLink from "@/components/molecules/CustomLink/CustomLink";
 
 export type SignUpFormData = {
   username: string;
@@ -242,13 +242,15 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
               )}
             />
             <label htmlFor="terms">
-              <Link
+              <CustomLink
                 href={termsUrl}
                 className={s.termsLink}
                 target="_blank"
+                underline
+                color="blue"
               >
                 利用規約
-              </Link>
+              </CustomLink>
               に同意する
             </label>
           </div>

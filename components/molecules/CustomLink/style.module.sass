@@ -1,0 +1,21 @@
+@use 'styles/index.sass' as *
+
+.link
+  text-decoration: none
+  color: $black
+
+  &:hover
+    +opacity()
+
+  &.blue
+    color: $blue
+
+  &.underline
+    text-decoration: underline
+    text-underline-offset: 2px
+
+  &.disabled
+    pointer-events: none
+    color: $darkGray
+
+
