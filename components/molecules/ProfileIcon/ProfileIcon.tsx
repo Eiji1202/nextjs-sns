@@ -21,6 +21,7 @@ const ProfileIcon: React.FC<Props> = ({ src, alt, size = 60, className }) => {
         width={size}
         height={size}
         className={s.image}
+        objectFit="cover"
       />
     </div>
   );
