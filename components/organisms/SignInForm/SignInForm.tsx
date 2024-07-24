@@ -5,14 +5,12 @@ import s from "./style.module.sass";
 import clsx from "clsx";
 import Button from "@/components/molecules/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { EMAIL_VALIDATION } from "@/utils/validations/email";
-import { PASSWORD_VALIDATION } from "@/utils/validations/password";
 import Title from "@/components/atoms/Title/Title";
+import { signInSchema } from "@/utils/schema/signIn";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export type SignInFormData = {
-  email: string;
-  password: string;
-};
+type SignInFormData = z.infer<typeof signInSchema>;
 
 const defaultValues: SignInFormData = {
   email: "",
@@ -29,13 +27,9 @@ const SignInForm: React.FC<Props> = ({ className }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<SignInFormData>({
+    resolver: zodResolver(signInSchema),
     defaultValues,
   });
-
-  const validations = {
-    email: EMAIL_VALIDATION,
-    password: PASSWORD_VALIDATION,
-  };
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000)); // 1秒間の遅延
@@ -61,7 +55,7 @@ const SignInForm: React.FC<Props> = ({ className }) => {
           <TextBox
             placeholder="メールアドレス"
             error={errors.email}
-            {...register("email", validations.email)}
+            {...register("email")}
           />
         </div>
         <div className={s.flexCol}>
@@ -74,7 +68,7 @@ const SignInForm: React.FC<Props> = ({ className }) => {
             type="password"
             placeholder="パスワード"
             error={errors.password}
-            {...register("password", validations.password)}
+            {...register("password")}
           />
         </div>
       </div>

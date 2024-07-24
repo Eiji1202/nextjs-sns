@@ -14,27 +14,13 @@ import Button from "@/components/molecules/Button/Button";
 import { termsUrl } from "@/config/site";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ErrorMessage from "@/components/atoms/ErrorMessage/ErrorMessage";
-import { USERNAME_VALIDATION } from "@/utils/validations/username";
-import { EMAIL_VALIDATION } from "@/utils/validations/email";
-import { PASSWORD_VALIDATION } from "@/utils/validations/password";
-import { DATE_OF_BIRTH_VALIDATION } from "@/utils/validations/dateOfBirth";
-import { GENDER_VALIDATION } from "@/utils/validations/gender";
 import Title from "@/components/atoms/Title/Title";
 import CustomLink from "@/components/molecules/CustomLink/CustomLink";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema } from "@/utils/schema/signUp";
+import { z } from "zod";
 
-export type SignUpFormData = {
-  username: string;
-  email: string;
-  password: string;
-  profileIcon: FileList | null;
-  dateOfBirth: {
-    year: number;
-    month: number;
-    day: number;
-  };
-  gender: string;
-  terms: boolean;
-};
+type SignUpFormData = z.infer<typeof signUpSchema>;
 
 const defaultValues: SignUpFormData = {
   username: "",
@@ -61,22 +47,9 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
     defaultValues,
   });
-
-  const validations = {
-    username: USERNAME_VALIDATION,
-    email: EMAIL_VALIDATION,
-    password: PASSWORD_VALIDATION,
-    profileIcon: {
-      required: "プロフィール画像は必須です",
-    },
-    dateOfBirth: DATE_OF_BIRTH_VALIDATION,
-    gender: GENDER_VALIDATION,
-    terms: {
-      required: "利用規約に同意してください",
-    },
-  };
 
   const handleSignUp: SubmitHandler<SignUpFormData> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -102,7 +75,7 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
           <TextBox
             type="text"
             placeholder="ユーザー名"
-            {...register("username", validations.username)}
+            {...register("username")}
             error={errors.username}
           />
         </div>
@@ -115,7 +88,7 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
           <TextBox
             placeholder="メールアドレス"
             error={errors.email}
-            {...register("email", validations.email)}
+            {...register("email")}
           />
         </div>
         <div className={s.flexCol}>
@@ -128,7 +101,7 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
             type="password"
             placeholder="パスワード"
             error={errors.password}
-            {...register("password", validations.password)}
+            {...register("password")}
           />
         </div>
         <div className={s.flexCol}>
@@ -142,7 +115,7 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
             type="file"
             id="profileIcon"
             accept="image/*"
-            {...register("profileIcon", validations.profileIcon)}
+            {...register("profileIcon")}
           />
           {errors.profileIcon && <ErrorMessage error={errors.profileIcon} />}
         </div>
@@ -156,7 +129,6 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
             <Controller
               control={control}
               name="dateOfBirth.year"
-              rules={validations.dateOfBirth.year}
               render={({ field: { onChange, value } }) => (
                 <SelectBox
                   options={yearsOption}
@@ -172,7 +144,6 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
             <Controller
               control={control}
               name="dateOfBirth.month"
-              rules={validations.dateOfBirth.month}
               render={({ field: { onChange, value } }) => (
                 <SelectBox
                   options={monthsOption}
@@ -188,7 +159,6 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
             <Controller
               control={control}
               name="dateOfBirth.day"
-              rules={validations.dateOfBirth.day}
               render={({ field: { onChange, value } }) => (
                 <SelectBox
                   options={daysOption}
@@ -212,7 +182,6 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
           <Controller
             control={control}
             name="gender"
-            rules={validations.gender}
             render={({ field: { onChange, value } }) => (
               <SelectBox
                 options={genderOptions}
@@ -231,7 +200,6 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
             <Controller
               control={control}
               name="terms"
-              rules={validations.terms}
               render={({ field }) => (
                 <input
                   type="checkbox"
