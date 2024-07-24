@@ -1,0 +1,56 @@
+@use 'styles/index.sass' as *
+
+.postContainer
+  padding: 24px 0
+  display: flex
+  gap: 16px
+
+  +viewM()
+    padding: 16px 0
+    gap: 8px
+
+  .leftWrapper
+    min-width: fit-content
+
+    .profileIcon
+      +viewM()
+        width: 48px!important
+        height: 48px!important
+
+      +viewS()
+        width: 40px!important
+        height: 40px!important
+
+  .rightWrapper
+    +flexCol()
+    gap: 16px
+
+    +viewM()
+      gap: 8px
+
+    .name
+      +fs18()
+      +fb()
+
+      +viewM()
+        +fs16()
+
+      +viewS()
+        +fs14()
+
+    .bottomWrapper
+      +flex()
+      justify-content: space-between
+
+      .date
+        color: $darkGray
+        +fs14()
+
+      .button
+        +flex()
+
+        &:hover
+          +opacity6()
+
+.hr
+  border: 0.5px solid $gray
