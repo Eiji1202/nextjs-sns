@@ -55,12 +55,12 @@ export const signUpSchemaClient = z.object({
 
 export type SignUpSchemaClientType = z.infer<typeof signUpSchemaClient>;
 
-// サーバー用のスキーマ
-// サーバー側ではprofileIconがFileList型になる
+// APIリクエスト用のスキーマ
+// profileIconをstring型に変更
 const baseSchema = signUpSchemaClient.omit({ profileIcon: true });
 
 export const signUpSchemaServer = baseSchema.extend({
-  profileIcon: z.instanceof(FileList),
+  profileIcon: z.string(),
 });
 
-export type SignUpSchemaServerType = z.infer<typeof signUpSchemaServer>;
+export type SignUpSchemaServerType = z.infer<typeof signUpSchemaServer>

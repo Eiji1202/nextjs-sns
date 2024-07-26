@@ -4,16 +4,30 @@ import Textarea from "@/components/molecules/Textarea/Textarea";
 import ProfileIcon from "@/components/molecules/ProfileIcon/ProfileIcon";
 import Button from "@/components/molecules/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { createPost } from "@/lib/api/posts/posts";
+import clsx from "clsx";
+
+type Props = {
+  className?: string;
+  profileIcon: string;
+  userId: string;
+  username: string;
+};
 
 type PostFormData = {
-  textarea: string;
+  content: string;
 };
 
 const defaultValues: PostFormData = {
-  textarea: "",
+  content: "",
 };
 
-const PostBox: React.FC = () => {
+const PostBox: React.FC<Props> = ({
+  className,
+  profileIcon,
+  userId,
+  username,
+}) => {
   const {
     register,
     handleSubmit,
@@ -25,7 +39,7 @@ const PostBox: React.FC = () => {
     mode: "onChange",
   });
 
-  const count = watch("textarea").length;
+  const count = watch("content").length;
   const charLimit = count === 0 || count > 140;
 
   const textareaValidation = {
@@ -43,21 +57,21 @@ const PostBox: React.FC = () => {
 
   return (
     <form
-      className={s.postBox}
+      className={clsx(s.postBox, className)}
       onSubmit={handleSubmit(handleCreatePost)}
     >
       <div className={s.profileWrapper}>
         <ProfileIcon
-          src="vercel.svg"
-          alt="vercel"
+          src={profileIcon}
+          alt="プロフィール画像"
           className={s.profileIcon}
         />
-        <p className={s.name}>vercelさん</p>
+        <p className={s.name}>{username}</p>
       </div>
       <Textarea
         placeholder="いまどうしてる？"
-        {...register("textarea", textareaValidation)}
-        error={errors.textarea}
+        {...register("content", textareaValidation)}
+        error={errors.content}
       />
       <div className={s.buttonWrapper}>
         <span className={s.count}>{count}/140</span>

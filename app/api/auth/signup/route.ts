@@ -3,12 +3,14 @@ import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { NextResponse, NextRequest } from 'next/server';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import bcrypt from 'bcrypt';
+import { signUpSchemaServer, SignUpSchemaServerType } from '@/utils/schema/signUp';
 
 // 新規ユーザー登録
 export async function POST(request: NextRequest) {
-  const requestData = await request.json();
+  const data = await request.json();
   try {
-    const { username, email, password, profileIcon, dateOfBirth, gender } = requestData;
+    const parsedData: SignUpSchemaServerType = signUpSchemaServer.parse(data)
+    const { username, email, password, profileIcon, dateOfBirth, gender } = parsedData;
 
     // メールアドレスが既に登録されていないか確認
     const q = query(collection(db, 'users'), where('email', '==', email));
@@ -41,7 +43,7 @@ export async function POST(request: NextRequest) {
       createdAt: new Date()
     });
 
-    return NextResponse.json({ message: '新規ユーザー登録に成功しました。' });
+    return NextResponse.json({ message: '新規ユーザー登録に成功しました' });
   } catch (error) {
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }

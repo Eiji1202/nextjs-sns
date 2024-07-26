@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       throw new Error('パスワードが間違っています');
     };
 
-    return NextResponse.json({ message: 'パスワードが一致しました', userId: userData.userId });
+    return NextResponse.json({ userId: userData.userId });
   } catch (error) {
     return NextResponse.json({ error: (error as Error).message }, { status: 401 });
   }

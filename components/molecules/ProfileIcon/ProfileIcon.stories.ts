@@ -16,8 +16,7 @@ export const Default: Story = {
 
 export const Size40: Story = {
   args: {
-    src: "next.svg",
+    src: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
     alt: "プロフィールアイコン",
-    size: 100,
   },
 };
