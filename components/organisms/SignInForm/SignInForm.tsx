@@ -9,6 +9,10 @@ import Title from "@/components/atoms/Title/Title";
 import { signInSchema } from "@/utils/schema/signIn";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "@/lib/api/auth/signIn";
+import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
 type SignInFormData = z.infer<typeof signInSchema>;
 
@@ -22,6 +26,7 @@ type Props = {
 };
 
 const SignInForm: React.FC<Props> = ({ className }) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,8 +37,19 @@ const SignInForm: React.FC<Props> = ({ className }) => {
   });
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1秒間の遅延
-    console.log(data);
+    const result = await signIn(data);
+    if (result.success) {
+      try {
+        await signInWithEmailAndPassword(auth, data.email, data.password);
+        router.push("/posts");
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("ログインに失敗しました:", error);
+      }
+    } else {
+      // eslint-disable-next-line no-console
+      console.error("ログイン処理中にエラーが発生しました", result.error);
+    }
   };
 
   return (
