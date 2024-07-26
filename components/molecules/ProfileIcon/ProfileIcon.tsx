@@ -5,22 +5,17 @@ import s from "./style.module.sass";
 type Props = {
   src: string;
   alt: string;
-  size?: number;
   className?: string;
 };
 
-const ProfileIcon: React.FC<Props> = ({ src, alt, size = 60, className }) => {
+const ProfileIcon: React.FC<Props> = ({ src, alt, className }) => {
   return (
-    <div
-      className={clsx(s.imageWrapper, className)}
-      style={{ width: size, height: size }}
-    >
+    <div className={clsx(s.imageWrapper, className)}>
       <Image
         src={src}
         alt={alt}
-        width={size}
-        height={size}
         className={s.image}
+        layout="fill"
         objectFit="cover"
       />
     </div>

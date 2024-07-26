@@ -59,15 +59,18 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
   const handleSignUp: SubmitHandler<SignUpFormSchema> = async (data) => {
     const result = await signUp(data);
     if (result.success) {
+      // eslint-disable-next-line no-console
       console.log("ユーザー登録に成功しました", result.data);
 
       try {
         await signInWithEmailAndPassword(auth, data.email, data.password);
         router.push("/posts");
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("サインインに失敗しました:", error);
       }
     } else {
+      // eslint-disable-next-line no-console
       console.error("ユーザー登録に失敗しました", result.error);
     }
   };

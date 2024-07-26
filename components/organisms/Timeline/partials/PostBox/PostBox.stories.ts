@@ -8,5 +8,9 @@ export default {
 type Story = StoryObj<typeof PostBox>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    profileIcon: "/dummyProfileIcon.png",
+    userId: "userId",
+    username: "username",
+  },
 };

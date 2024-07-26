@@ -1,11 +1,9 @@
 import { uploadProfileIcon } from "@/lib/hooks/firebase/uploadProfileIcon";
-import { SignUpSchemaClientType, signUpSchemaServer, SignUpSchemaServerType } from "@/utils/schema/signUp";
+import { SignUpSchemaClientType } from "@/utils/schema/signUp";
 
 export async function signUp(data: SignUpSchemaClientType) {
-  const parsedData: SignUpSchemaServerType = signUpSchemaServer.parse(data);
-
   // プロフィール画像のアップロードとURLの取得
-  const profileIconFile = parsedData.profileIcon[0];
+  const profileIconFile = data.profileIcon[0] as File;
   const profileIconUrl = await uploadProfileIcon(profileIconFile);
 
   try {
@@ -14,7 +12,7 @@ export async function signUp(data: SignUpSchemaClientType) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({...parsedData, profileIcon: profileIconUrl}),
+      body: JSON.stringify({...data, profileIcon: profileIconUrl}),
     });
 
     const result = await res.json();
