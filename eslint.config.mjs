@@ -17,6 +17,7 @@ const myRules = {
       argsIgnorePattern: "^_",
     },
   ],
+  'no-console': 'warn',
 };
 
 export default [

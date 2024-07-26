@@ -38,7 +38,6 @@ const SelectBox: React.FC<Props> = ({
     if (selected && onChange) {
       onChange(selected);
     }
-    console.log(selected);
   };
 
   const selectBoxClassNames = clsx(s.selectBox, className, {

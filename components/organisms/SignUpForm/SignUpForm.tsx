@@ -17,16 +17,20 @@ import ErrorMessage from "@/components/atoms/ErrorMessage/ErrorMessage";
 import Title from "@/components/atoms/Title/Title";
 import CustomLink from "@/components/molecules/CustomLink/CustomLink";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema } from "@/utils/schema/signUp";
+import { signUpSchemaClient } from "@/utils/schema/signUp";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { signUp } from "@/lib/api/auth/signUp";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
-type SignUpFormData = z.infer<typeof signUpSchema>;
+type SignUpFormSchema = z.infer<typeof signUpSchemaClient>;
 
-const defaultValues: SignUpFormData = {
+const defaultValues: SignUpFormSchema = {
   username: "",
   email: "",
   password: "",
-  profileIcon: null,
+  profileIcon: "",
   dateOfBirth: {
     year: 0,
     month: 0,
@@ -41,19 +45,31 @@ type Props = {
 };
 
 const SignUpForm: React.FC<Props> = ({ className }) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpFormData>({
-    resolver: zodResolver(signUpSchema),
+  } = useForm<SignUpFormSchema>({
+    resolver: zodResolver(signUpSchemaClient),
     defaultValues,
   });
 
-  const handleSignUp: SubmitHandler<SignUpFormData> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+  const handleSignUp: SubmitHandler<SignUpFormSchema> = async (data) => {
+    const result = await signUp(data);
+    if (result.success) {
+      console.log("ユーザー登録に成功しました", result.data);
+
+      try {
+        await signInWithEmailAndPassword(auth, data.email, data.password);
+        router.push("/posts");
+      } catch (error) {
+        console.error("サインインに失敗しました:", error);
+      }
+    } else {
+      console.error("ユーザー登録に失敗しました", result.error);
+    }
   };
 
   return (

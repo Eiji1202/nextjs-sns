@@ -1,17 +1,25 @@
 import { z } from 'zod';
 
-export const signUpSchema = z.object({
+const MAX_IMAGE_SIZE = 5;
+
+const sizeInMB = (sizeInBytes: number, decimalsNum = 2) => {
+  const result = sizeInBytes / (1024 * 1024);
+  return +result.toFixed(decimalsNum);
+};
+
+// クライアント用のスキーマ
+export const signUpSchemaClient = z.object({
   username:
     z.string()
-    .min(1, 'ユーザー名は必須です')
+    .min(1, 'ユーザー名を入力してください')
     .max(20, 'ユーザー名は20文字以内で入力してください'),
   email:
     z.string()
-    .min(1, 'メールアドレスは必須です')
+    .min(1, 'メールアドレスを入力してください')
     .email('メールアドレスの形式が正しくありません'),
   password:
     z.string()
-    .min(1, 'パスワードは入力必須です')
+    .min(1, 'パスワードを入力してください')
     .refine((val) => val.length >= 8, {
       message: "パスワードは8文字以上で入力してください",
     })
@@ -19,9 +27,13 @@ export const signUpSchema = z.object({
       message: "パスワードは半角英数で入力してください",
     }),
   profileIcon:
-    z.any()
-    .refine((val) => val !== null, {
-      message: "プロフィール画像は必須です"
+    z.union([z.instanceof(FileList), z.literal("")])
+    .refine((val) => val !== "" && val.length > 0, {
+      message: "プロフィール画像を選択してください"
+    })
+    .refine((fileList: FileList | string) => typeof fileList === "string" || Array.from(fileList)
+    .every(file => sizeInMB(file.size) <= MAX_IMAGE_SIZE), {
+      message: "ファイルサイズは最大5MBです",
     }),
   dateOfBirth:
     z.object({
@@ -41,4 +53,14 @@ export const signUpSchema = z.object({
     })
 });
 
-export type UserSchemaType = z.infer<typeof signUpSchema>;
+export type SignUpSchemaClientType = z.infer<typeof signUpSchemaClient>;
+
+// サーバー用のスキーマ
+// サーバー側ではprofileIconがFileList型になる
+const baseSchema = signUpSchemaClient.omit({ profileIcon: true });
+
+export const signUpSchemaServer = baseSchema.extend({
+  profileIcon: z.instanceof(FileList),
+});
+
+export type SignUpSchemaServerType = z.infer<typeof signUpSchemaServer>;
