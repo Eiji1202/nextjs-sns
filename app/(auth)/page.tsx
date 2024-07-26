@@ -1,17 +1,12 @@
-import SignUpForm from "@/components/organisms/SignUpForm/SignUpForm";
 import s from "./style.module.sass";
-import SignInForm from "@/components/organisms/SignInForm/SignInForm";
 import Header from "@/components/organisms/Header/Header";
+import Auth from "@/components/pages/Auth/Auth";
 
-export default function Auth() {
+export default function AuthPage() {
   return (
     <div className={s.mainContainer}>
       <Header />
-      <div className={s.formContainer}>
-        <SignUpForm className={s.form} />
-        <p className={s.or}>または</p>
-        <SignInForm className={s.form} />
-      </div>
+      <Auth />
     </div>
   );
 }
