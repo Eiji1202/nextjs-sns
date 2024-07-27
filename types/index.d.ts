@@ -21,3 +21,12 @@ export type SidebarMenu = {
   icon: LucideIcon;
   url: string;
 };
+
+export type Post = {
+  postId: string;
+  userId: string;
+  username: string;
+  content: string;
+  profileIcon: string;
+  createdAt: string;
+};

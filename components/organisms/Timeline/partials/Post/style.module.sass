@@ -23,10 +23,8 @@
 
   .rightWrapper
     +flexCol()
-    gap: 16px
-
-    +viewM()
-      gap: 8px
+    gap: 8px
+    flex-grow: 1
 
     .name
       +fs18()
@@ -36,6 +34,13 @@
         +fs16()
 
       +viewS()
+        +fs14()
+
+    .postContent
+      +fs16()
+      white-space: pre-wrap
+
+      +viewM()
         +fs14()
 
     .bottomWrapper
