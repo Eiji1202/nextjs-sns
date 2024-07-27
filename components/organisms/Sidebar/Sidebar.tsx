@@ -8,9 +8,10 @@ import clsx from "clsx";
 
 type Props = {
   className?: string;
+  isSignedIn: boolean;
 };
 
-const Sidebar: React.FC<Props> = ({ className }) => {
+const Sidebar: React.FC<Props> = ({ className, isSignedIn }) => {
   return (
     <aside className={clsx(s.sidebar, className)}>
       <Title
@@ -18,11 +19,15 @@ const Sidebar: React.FC<Props> = ({ className }) => {
         className={s.title}
       />
       <ul className={s.ul}>
-        {sidebarMenus.map((menu) => (
-          <li className={s.li}>
+        {sidebarMenus.map((menu, index) => (
+          <li
+            className={s.li}
+            key={index}
+          >
             <CustomLink
               href={menu.url}
               className={s.link}
+              disabled={!isSignedIn}
             >
               <menu.icon size={24} />
               <span className={s.menuName}>{menu.name}</span>

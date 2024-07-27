@@ -7,17 +7,15 @@ import { Post as PostType } from "@/types";
 import Post from "./partials/Post/Post";
 import Loader from "@/components/atoms/Loader/Loader";
 import { fetchPosts } from "@/lib/api/posts/posts";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/config/firebase";
 import { fetchUserData } from "@/lib/api/users/users";
 import { UserDataType } from "@/utils/schema/user";
+import { User } from "firebase/auth";
 
 type Props = {
   className?: string;
+  user: User | null | undefined;
 };
 
-const Timeline: React.FC<Props> = ({ className }) => {
-  const [user] = useAuthState(auth);
 
   const [userData, setUserData] = useState<UserDataType | null>(null);
 
@@ -40,11 +38,7 @@ const Timeline: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={clsx(s.timeline, className)}>
-      <PostBox
-        profileIcon={userData?.profileIcon || "/dummyProfileIcon.png"}
-        userId={userData?.userId as string}
-        username={userData?.username as string}
-      />
+      <PostBox userData={userData} />
       <hr className={s.hr} />
       {Array.from({ length: 3 }).map((_, i) => (
         <Post key={i} />

@@ -6,12 +6,11 @@ import Button from "@/components/molecules/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { createPost } from "@/lib/api/posts/posts";
 import clsx from "clsx";
+import { UserDataType } from "@/utils/schema/user";
 
 type Props = {
   className?: string;
-  profileIcon: string;
-  userId: string;
-  username: string;
+  userData: Pick<UserDataType, "userId" | "username" | "profileIcon"> | null;
 };
 
 type PostFormData = {
@@ -22,12 +21,7 @@ const defaultValues: PostFormData = {
   content: "",
 };
 
-const PostBox: React.FC<Props> = ({
-  className,
-  profileIcon,
-  userId,
-  username,
-}) => {
+const PostBox: React.FC<Props> = ({ className, userData }) => {
   const {
     register,
     handleSubmit,
@@ -62,16 +56,17 @@ const PostBox: React.FC<Props> = ({
     >
       <div className={s.profileWrapper}>
         <ProfileIcon
-          src={profileIcon}
+          src={userData?.profileIcon || "/dummyProfileIcon.png"}
           alt="プロフィール画像"
           className={s.profileIcon}
         />
-        <p className={s.name}>{username}</p>
+        <p className={s.name}>{userData?.username}</p>
       </div>
       <Textarea
         placeholder="いまどうしてる？"
         {...register("content", textareaValidation)}
         error={errors.content}
+        disabled={!userData}
       />
       <div className={s.buttonWrapper}>
         <span className={s.count}>{count}/140</span>
