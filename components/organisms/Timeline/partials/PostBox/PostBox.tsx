@@ -3,35 +3,27 @@ import s from "./style.module.sass";
 import Textarea from "@/components/molecules/Textarea/Textarea";
 import ProfileIcon from "@/components/molecules/ProfileIcon/ProfileIcon";
 import Button from "@/components/molecules/Button/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { createPost } from "@/lib/api/posts/posts";
+import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
 import { UserDataType } from "@/utils/schema/user";
 
 type Props = {
   className?: string;
   userData: Pick<UserDataType, "userId" | "username" | "profileIcon"> | null;
+  onClick: (_data: PostFormData) => void;
 };
 
-type PostFormData = {
+export type PostFormData = {
   content: string;
 };
 
-const defaultValues: PostFormData = {
-  content: "",
-};
-
-const PostBox: React.FC<Props> = ({ className, userData }) => {
+const PostBox: React.FC<Props> = ({ className, userData, onClick }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     watch,
-    reset,
-  } = useForm<PostFormData>({
-    defaultValues,
-    mode: "onChange",
-  });
+  } = useFormContext<PostFormData>();
 
   const count = watch("content").length;
   const charLimit = count === 0 || count > 140;
@@ -43,16 +35,10 @@ const PostBox: React.FC<Props> = ({ className, userData }) => {
     },
   };
 
-  const handleCreatePost: SubmitHandler<PostFormData> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    reset();
-    console.log(data);
-  };
-
   return (
     <form
       className={clsx(s.postBox, className)}
-      onSubmit={handleSubmit(handleCreatePost)}
+      onSubmit={handleSubmit(onClick)}
     >
       <div className={s.profileWrapper}>
         <ProfileIcon

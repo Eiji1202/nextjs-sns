@@ -3,7 +3,7 @@ import { collection, where, getDocs, query } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 
 // ユーザー情報を取得
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   const { id: userId } = params;
   if (!userId) {
     return NextResponse.json({ error: 'ユーザーIDが指定されていません' }, { status: 400 });

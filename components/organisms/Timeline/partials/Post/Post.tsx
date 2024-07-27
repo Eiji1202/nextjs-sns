@@ -1,29 +1,46 @@
 import { Trash2 } from "lucide-react";
 import s from "./style.module.sass";
 import ProfileIcon from "@/components/molecules/ProfileIcon/ProfileIcon";
+import clsx from "clsx";
+import { Post as PostType } from "@/types";
+clsx;
 
-const Post: React.FC = () => {
+type Props = {
+  className?: string;
+  postData: PostType;
+  isDeletable: boolean;
+  onClick: (_postId: string) => void;
+};
+
+const Post: React.FC<Props> = ({
+  className,
+  postData: { username, profileIcon, content, createdAt, postId },
+  isDeletable,
+  onClick,
+}) => {
   return (
     <>
-      <div className={s.postContainer}>
+      <div className={clsx(s.postContainer, className)}>
         <div className={s.leftWrapper}>
           <ProfileIcon
-            src="vercel.svg"
-            alt="vercel"
+            src={profileIcon}
+            alt="プロフィールアイコン"
             className={s.profileIcon}
           />
         </div>
         <div className={s.rightWrapper}>
-          <p className={s.name}>Vercelさん</p>
-          <p className={s.postContent}>
-            {`Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur,
-            voluptatem!`}
-          </p>
+          <p className={s.name}>{username}</p>
+          <p className={s.postContent}>{content}</p>
           <div className={s.bottomWrapper}>
-            <span className={s.date}>2024/07/24 02:00</span>
-            <button className={s.button}>
-              <Trash2 size={20} />
-            </button>
+            <span className={s.date}>{createdAt}</span>
+            {isDeletable && (
+              <button
+                className={s.button}
+                onClick={() => onClick(postId)}
+              >
+                <Trash2 size={20} />
+              </button>
+            )}
           </div>
         </div>
       </div>
