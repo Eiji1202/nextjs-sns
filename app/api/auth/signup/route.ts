@@ -8,6 +8,7 @@ import { signUpSchemaServer, SignUpSchemaServerType } from '@/utils/schema/signU
 // 新規ユーザー登録
 export async function POST(request: NextRequest) {
   const data = await request.json();
+
   try {
     const parsedData: SignUpSchemaServerType = signUpSchemaServer.parse(data)
     const { username, email, password, profileIcon, dateOfBirth, gender } = parsedData;
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
     const userSnapshot = await getDocs(q);
 
     if (!userSnapshot.empty) {
-      return NextResponse.json({ error: 'このメールアドレスは既に使用されています。' }, { status: 400 });
+      return NextResponse.json({ error: '登録済みのメールアドレスです' }, { status: 400 });
     }
 
     // パスワードをハッシュ化

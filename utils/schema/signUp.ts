@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
 const MAX_IMAGE_SIZE = 5;
-
 const sizeInMB = (sizeInBytes: number, decimalsNum = 2) => {
   const result = sizeInBytes / (1024 * 1024);
   return +result.toFixed(decimalsNum);
 };
+const IMAGE_TYPES = ['image/jpg', 'image/png', 'image/jpeg'];
 
 // クライアント用のスキーマ
 export const signUpSchemaClient = z.object({
@@ -26,14 +26,15 @@ export const signUpSchemaClient = z.object({
     .refine((val) => /^[a-zA-Z\d]+$/.test(val), {
       message: "パスワードは半角英数で入力してください",
     }),
-  profileIcon:
-    z.union([z.instanceof(FileList), z.literal("")])
-    .refine((val) => val !== "" && val.length > 0, {
-      message: "プロフィール画像を選択してください"
+  profileIcon: z.any()
+    .refine((files) => files instanceof FileList && files.length >= 1, {
+      message: 'プロフィール画像を選択してください',
     })
-    .refine((fileList: FileList | string) => typeof fileList === "string" || Array.from(fileList)
-    .every(file => sizeInMB(file.size) <= MAX_IMAGE_SIZE), {
+    .refine((files) => files instanceof FileList && Array.from(files).every(file => sizeInMB(file.size) <= MAX_IMAGE_SIZE), {
       message: "ファイルサイズは最大5MBです",
+    })
+    .refine((files) => files instanceof FileList && Array.from(files).every(file => IMAGE_TYPES.includes(file.type)), {
+      message: '.jpg、.jpeg、.pngのみ可能です',
     }),
   dateOfBirth:
     z.object({
@@ -55,10 +56,11 @@ export const signUpSchemaClient = z.object({
 
 export type SignUpSchemaClientType = z.infer<typeof signUpSchemaClient>;
 
-// APIリクエスト用のスキーマ
-// profileIconをstring型に変更
+// signUpSchemaClientからprofileIconを取り除いたスキーマ
 const baseSchema = signUpSchemaClient.omit({ profileIcon: true });
 
+// APIリクエスト用のスキーマ
+// profileIconをstring型に変更
 export const signUpSchemaServer = baseSchema.extend({
   profileIcon: z.string(),
 });
