@@ -1,0 +1,21 @@
+@use "styles/index.sass" as *
+
+.button
+  +flex()
+  gap: 8px
+  padding: 8px
+  width: fit-content
+  +br8()
+  +fb()
+
+  &:hover
+    background-color: $lightGray
+    +transition()
+
+  &.disabled
+    color: $gray
+    pointer-events: none
+
+  .label
+    +viewM()
+      display: none
