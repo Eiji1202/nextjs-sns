@@ -11,6 +11,7 @@ type Props = {
   underline?: boolean;
   children: ReactNode;
   disabled?: boolean;
+  opacity?: boolean;
 };
 
 const CustomLink: React.FC<Props> = ({
@@ -21,11 +22,13 @@ const CustomLink: React.FC<Props> = ({
   underline,
   children,
   disabled,
+  opacity = false,
 }) => {
   const linkClassNames = clsx(s.link, className, {
     [s.blue]: color === "blue",
     [s.disabled]: disabled,
     [s.underline]: underline,
+    [s.opacity]: opacity,
   });
 
   return (

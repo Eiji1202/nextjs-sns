@@ -36,6 +36,5 @@ export const Disabled: Story = {
     href: '/',
     children: 'Disabled',
     disabled: true,
-    underline: true,
   },
 };
