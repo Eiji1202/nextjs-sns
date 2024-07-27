@@ -5,6 +5,7 @@ import { sidebarMenus } from "@/config/sidebar";
 import Title from "@/components/atoms/Title/Title";
 import CustomLink from "@/components/molecules/CustomLink/CustomLink";
 import clsx from "clsx";
+import SignOutButton from "./partials/SignOutButton/SignOutButton";
 
 type Props = {
   className?: string;
@@ -34,6 +35,9 @@ const Sidebar: React.FC<Props> = ({ className, isSignedIn }) => {
             </CustomLink>
           </li>
         ))}
+        <li className={s.li}>
+          <SignOutButton disabled={!isSignedIn} />
+        </li>
       </ul>
     </aside>
   );
