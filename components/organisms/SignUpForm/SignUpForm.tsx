@@ -30,7 +30,7 @@ const defaultValues: SignUpFormSchema = {
   username: "",
   email: "",
   password: "",
-  profileIcon: "",
+  profileIcon: null,
   dateOfBirth: {
     year: 0,
     month: 0,
@@ -235,6 +235,7 @@ const SignUpForm: React.FC<Props> = ({ className }) => {
                 target="_blank"
                 underline
                 color="blue"
+                opacity
               >
                 利用規約
               </CustomLink>
