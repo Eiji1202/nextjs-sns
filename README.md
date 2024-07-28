@@ -18,8 +18,8 @@
 - Next.js（バージョン 14 の AppRouter）
 - FirebaseAuthentication
 - Firestore
-- ReactHookForm（ユーザー登録のフォームと投稿の型付けとバリデーション）
-- Zod（クライアントとAPIのリクエストの型付け）
+- ReactHookForm（ユーザー登録とログインのフォームのバリデーション）
+- Zod（スキーマの定義とバリデーションで、ReactHookFormと組み合わせることでより堅牢な実装ができる）
 
 ## ユーザー登録時の入力内容
 
@@ -34,3 +34,16 @@
 ## ログイン時の入力内容
 - メールアドレス
 - パスワード
+
+## 実装後
+> **新規ユーザー登録 → 投稿一覧ページにリダイレクト → 記事を投稿 → 投稿削除**
+
+https://github.com/user-attachments/assets/6b789825-b81d-46a2-8c16-6993324687a8
+
+> **ログイン → 投稿一覧ページにリダイレクト → 記事を投稿 → 投稿削除**
+
+https://github.com/user-attachments/assets/8b94cb8a-a023-4899-84f4-291e96ded512
+
+
+
+
