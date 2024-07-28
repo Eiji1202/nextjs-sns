@@ -17,7 +17,7 @@ const myRules = {
       argsIgnorePattern: "^_",
     },
   ],
-  'no-console': 'warn',
+  "no-console": "warn",
 };
 
 export default [
@@ -27,6 +27,7 @@ export default [
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
+        project: "./tsconfig.json",
       },
       globals: {
         React: "readonly",
